@@ -6,7 +6,10 @@ use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Socialite;
+use App\Http\Requests;
 use \App\Usuario;
+use App\Http\Requests\UsuarioRequest;
+
 class LoginController extends Controller
 {
     /**
@@ -24,9 +27,18 @@ class LoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function RegistroUsuario(UsuarioRequest $request)
     {
-        //
+        $usuario = new Usuario();
+        $usuario->Nombres = $request->Nombres;
+        $usuario->email = $request->email;
+        $usuario->password = $request->password;
+        $usuario->Estado =1; 
+        $usuario->save();
+       
+        return response()->json([
+            "mensaje" =>  $usuario
+        ]);
     }
 
     public function redirectToProvider()
@@ -56,7 +68,7 @@ class LoginController extends Controller
      */
     public function show($id)
     {
-        //
+    
     }
 
     /**
@@ -98,13 +110,10 @@ class LoginController extends Controller
     {
         // Obtenemos los datos del usuario
         $social_user = Socialite::driver('facebook')->stateless()->user(); 
-        // dd($social_user);
-        echo $social_user->name;
       
         // Comprobamos si el usuario ya existe
         if ($user = Usuario::where('email', $social_user->email)->first()) { 
-            return $user; // Login y redirección
-            // return view('Usuario.Usuarios',compact('datos'));
+           return  $this->authAndRedirect($user);
          } 
         else {  
             // En caso de que no exista creamos un nuevo usuario con sus datos.
@@ -125,6 +134,6 @@ class LoginController extends Controller
     {
         Auth::login($user);
  
-        return redirect()->to('/home#');
+        return redirect()->to('/Ofertas');
     }
 }

@@ -17,3 +17,8 @@ Route::get('/', function () {
 
 Route::get('login/facebook', 'LoginController@redirectToProvider');
 Route::get('login/facebook/callback', 'LoginController@handleProviderCallback');
+Route::get('Ofertas', 'OfertasController@index');
+Route::post('RegistroUsuario', 'LoginController@RegistroUsuario');
+Route::get('Registro', function () {
+    return view('Registro/Registro');
+});

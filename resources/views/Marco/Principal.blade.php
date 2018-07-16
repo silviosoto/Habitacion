@@ -12,7 +12,8 @@
     <!-- Compiled and minified JavaScript -->
     <link rel="stylesheet" href="{{asset('css\Materialize\css\materialize.min.css')}}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <title>BlackBox</title>
+    @yield('css')
+    <title>Habitación</title>
 </head>
 
 <body>
