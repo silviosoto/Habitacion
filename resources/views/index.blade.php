@@ -38,11 +38,7 @@
                 <a class="waves-effect waves-light btn-large btn-facebook" href="login/facebook"><i class="material-icons left"></i>facebook</a>
                 </div>
             </div>
-            <div class="row">
-                <div class="input-field col s12 ">
-                <a class="waves-effect waves-light btn-large btn-tewtter"><i class="material-icons left"></i>twetter</a>
-                </div>
-            </div>
+            
         </div>
         </div>  
       </div>

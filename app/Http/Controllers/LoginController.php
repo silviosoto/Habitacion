@@ -9,6 +9,8 @@ use Socialite;
 use App\Http\Requests;
 use \App\Usuario;
 use App\Http\Requests\UsuarioRequest;
+use App\Http\Requests\login;
+use Illuminate\Support\Facades\Mail;
 
 class LoginController extends Controller
 {
@@ -22,6 +24,11 @@ class LoginController extends Controller
         //
     }
 
+    public function BuscarUsuario($Email){
+        $usuario = DB::table('usuario')->where('email', $Email)->first();
+        return $usuario;
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -29,16 +36,40 @@ class LoginController extends Controller
      */
     public function RegistroUsuario(UsuarioRequest $request)
     {
+        
         $usuario = new Usuario();
         $usuario->Nombres = $request->Nombres;
         $usuario->email = $request->email;
         $usuario->password = $request->password;
         $usuario->Estado =1; 
+        $usuario->confirmation_code = str_random(25);
         $usuario->save();
-       
-        return response()->json([
-            "mensaje" =>  $usuario
-        ]);
+        
+        $arrayUsuario = [
+            "email" => $usuario->email,
+        ];
+        var_dump($arrayUsuario["email"]);
+        // Enviar codigo de confirmacion
+        Mail::send('email.confirmacion', $arrayUsuario, function($message) use ($arrayUsuario) {
+            $message->from('emasl@styde.net', 'Styde.Net');
+            $message->to($arrayUsuario['email'])->subject('Notificación');
+        });
+
+        return redirect()->to('/CorreoEnviado.CorreoEnviado');
+    }
+
+    public function verify($code)
+    {
+        $user = User::where('confirmation_code', $code)->first();
+
+        if (! $user)
+            return redirect('/');
+
+        $user->confirmed = true;
+        $user->confirmation_code = null;
+        $user->save();
+
+        return redirect('/home')->with('notification', 'Has confirmado correctamente tu correo!');
     }
 
     public function redirectToProvider()
@@ -47,16 +78,28 @@ class LoginController extends Controller
     }
 
 
-    public function login(Request $request)
+    // public function login(Request $request)
+    // {
+    //     $usuario = new Usuario();
+    //     $usuario->Nombres = $request->name;
+    //     $usuario->email = $request->email;
+    //     $usuario->password = $request->password;
+    //     $usuario->Estado =1; 
+    //     $usuario->save();
+    //     return response()->json([
+    //         "mensaje" =>  $usuario
+    //     ]);
+    // }
+
+    public function login(login $request)
     {
-        $usuario = new Usuario();
-        $usuario->Nombres = $request->name;
-        $usuario->email = $request->email;
-        $usuario->password = $request->password;
-        $usuario->Estado =1; 
-        $usuario->save();
+        $autenticado = false;
+        if(Auth::attempt(['email'=>$email, 'password'=>$password, 'rol' =>  "Policia"])){
+            $autenticado = true;
+        }
+        Session::flash('message-error','Datos son incorrectos');
         return response()->json([
-            "mensaje" =>  $usuario
+            "usuario" => $autenticado      
         ]);
     }
 

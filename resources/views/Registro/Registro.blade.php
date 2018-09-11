@@ -1,5 +1,4 @@
 @extends('Marco.Principal')
-
 @section('css')
 <link rel="stylesheet" href="{{asset('css/login/login.css')}}">
 @stop
@@ -15,7 +14,6 @@
   <div class="container center">
     <div class="section"></div>
     <div class="Error"></div>
-  
         <div class="row ">
         <div class="centro">
         <form  method="POST" action="{{ url('RegistroUsuario') }}">
@@ -25,13 +23,11 @@
                     <input id="Nombres" type="text" class="validate" name="Nombres">
                     <label for="Nombres">Nombres</label>
                     {!! $errors->first('Nombres',' <span class="helper-text font-red" data-error="wrong" data-success="right">:message</span>') !!}
-
                 </div>
                 <div class="input-field col s12">
                     <input id="email" type="email" class="validate" name="email">
                     <label for="email">Email</label>
                     {!! $errors->first('email',' <span class="helper-text font-red" data-error="wrong" data-success="right">:message</span>') !!}
-
                 </div>
             </div>
             <div class="row">
@@ -59,13 +55,10 @@
                 <a class="waves-effect waves-light btn-large btn-facebook" href="login/facebook"><i class="material-icons left"></i>facebook</a>
                 </div>
             </div>
-           
         </div>
         </div>  
       </div>
-     
   </div>
-        
       </div>
     </div>
 </div>
@@ -73,7 +66,6 @@
   <footer class="page-footer color-lateral" >
       <div class="footer-copyright">
         <div class="container">
-
         <a class="grey-text text-lighten-4 right" href="#!">Mas Información</a>
         </div>
       </div>
