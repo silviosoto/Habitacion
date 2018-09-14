@@ -17,8 +17,9 @@
       <div class="section"></div>
         <div class="row">
             <div class="green lighten-4">
-                <div class="col s2 ">
-                    <p class="center">Hola</p>  
+                <div class=" col 12 ">
+                    <p >Enviamos un correo a su cuenta por 
+                    favor habralo para finalizar el proceso de autenticación </p>  
                 </div>
             </div>
      </div>

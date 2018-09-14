@@ -24,11 +24,7 @@ class LoginController extends Controller
         //
     }
 
-    public function BuscarUsuario($Email){
-        $usuario = DB::table('usuario')->where('email', $Email)->first();
-        return $usuario;
-    }
-
+   
     /**
      * Show the form for creating a new resource.
      *
@@ -76,20 +72,6 @@ class LoginController extends Controller
     {
         return Socialite::driver('facebook')->redirect();
     }
-
-
-    // public function login(Request $request)
-    // {
-    //     $usuario = new Usuario();
-    //     $usuario->Nombres = $request->name;
-    //     $usuario->email = $request->email;
-    //     $usuario->password = $request->password;
-    //     $usuario->Estado =1; 
-    //     $usuario->save();
-    //     return response()->json([
-    //         "mensaje" =>  $usuario
-    //     ]);
-    // }
 
     public function login(login $request)
     {
