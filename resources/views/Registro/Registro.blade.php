@@ -11,18 +11,18 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         </ul>
-        <a  class="nav-link" href="{{ url('/') }}">Registrarse</a> 
+        <a  class="nav-link" href="{{ url('/') }}">Entrar</a> 
     </div>
     </nav>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-8">
-                <form method="POST" action="{{ url('RegistroUsuario') }}" >
+                <form method="POST" action="{{ url('/RegistroUsuario') }}" >
                 {{ csrf_field() }}
                 <div class="form-row justify-content-center">
                     <div class="form-group col-md-4">
                         <label for="Nombres">Nombres </label>
-                        <input id="Nombres" type="Nombres" class="form-control">
+                        <input id="Nombres" name="Nombres" type="Nombres" class="form-control">
                         {!! $errors->first('Nombres',' <span class="helper-text font-red" data-error="wrong" data-success="right">:message</span>') !!}
                     </div>
                     <div class="form-group col-md-4">

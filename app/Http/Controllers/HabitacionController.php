@@ -1,10 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 
-class OfertasController extends Controller
+class HabitacionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +12,7 @@ class OfertasController extends Controller
      */
     public function index()
     {
-        return view('Oferta.Ofertas');
+        //
     }
 
     /**
@@ -23,7 +22,7 @@ class OfertasController extends Controller
      */
     public function create()
     {
-        //
+       
     }
 
     /**
@@ -34,7 +33,17 @@ class OfertasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $moto = new motocicleta();
+        $moto->placa = $request->placa;
+        $moto->cilindrada = $request->cilindrada;
+        $moto->color = $request->color;
+        $moto->Eliminado = 0;
+        $moto->user_id = $request->iduser;
+        $moto->dispositivos_id = $request->idDisp;
+        $moto->save();
+        return response()->json([
+            "mensaje" =>  $request->all()
+        ]);
     }
 
     /**

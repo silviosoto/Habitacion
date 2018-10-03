@@ -1,0 +1,20 @@
+.cards-view{
+    height: 500px;
+}
+.Espacio{
+    height: 50px;
+}
+.Filtros{
+    height: 400px;
+    background-color: #f8f9fa;
+}
+
+.grey{
+    background-color: #f8f9fa;
+}
+
+.container-filtro{
+    background-color: white;
+    height: 350px;
+    margin-top: 10px;
+}

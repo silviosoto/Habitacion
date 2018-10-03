@@ -8,8 +8,10 @@ use App\Http\Controllers\Controller;
 use Socialite;
 use App\Http\Requests;
 use \App\Usuario;
+use Session;
 use App\Http\Requests\UsuarioRequest;
 use App\Http\Requests\login;
+
 use Illuminate\Support\Facades\Mail;
 
 class LoginController extends Controller
@@ -36,7 +38,7 @@ class LoginController extends Controller
         $usuario = new Usuario();
         $usuario->Nombres = $request->Nombres;
         $usuario->email = $request->email;
-        $usuario->password = $request->password;
+        $usuario->password = bcrypt($request->password);
         $usuario->Estado =1; 
         $usuario->confirmation_code = str_random(25);
         $usuario->save();
@@ -73,11 +75,14 @@ class LoginController extends Controller
         return Socialite::driver('facebook')->redirect();
     }
 
+
     public function login(login $request)
-    {
+    {   
         $autenticado = false;
-        if(Auth::attempt(['email'=>$email, 'password'=>$password, 'rol' =>  "Policia"])){
+        if(Auth::attempt(['email'=>$request['email'], 'password'=>$request['password'], 'confirmed'=>1,
+        'Estado'=>'1'] )){
             $autenticado = true;
+            return redirect()->to('/Ofertas');
         }
         Session::flash('message-error','Datos son incorrectos');
         return response()->json([

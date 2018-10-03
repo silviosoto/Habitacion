@@ -19,17 +19,20 @@
         <br>
         <div class="row justify-content-center">
             <div class="col-4">
-                <form method="POST" action="{{ url('/login') }}">
+                <form method="POST" action="{{ url('/Login') }}">
                     {{ csrf_field() }}
                     <div class="form-group ">
                         <label for="email">Email </label>
-                        <input id="email" type="email" class="form-control">
+                        <input id="email" name="email" type="email" class="form-control">  	
+                        <p>{{ $errors->first('email') }}</p>
                     </div>
                     <div class="form-group">
                         <label for="password">Contraseña</label>                        
-                        <input id="password" type="password" class="form-control">
-                        <label for="password">Password</label>
+                        <input id="password" name="password" type="password" class="form-control">
+                        <label for="password">Password</label>	
+                        <p>{{ $errors->first('password') }}</p>
                     </div>
+
                     <button type="submit" class="btn btn-success btn-lg btn-block">Submit</button>
                 </form>
                 </div> 
