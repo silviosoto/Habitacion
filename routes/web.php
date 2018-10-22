@@ -14,8 +14,9 @@
 Route::get('/', function () {
     return view('index');
 });
-
+Route::resource('Habitacion', 'HabitacionController');
 Route::get('login/facebook', 'LoginController@redirectToProvider');
+
 Route::get('login/facebook/callback', 'LoginController@handleProviderCallback');
 Route::get('Ofertas', 'OfertasController@index');
 Route::get('CorreoEnviado/CorreoEnviado', function () {

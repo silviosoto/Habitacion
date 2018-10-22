@@ -1,6 +1,7 @@
 @extends('Marco.Principal')
 @section('css')
 <link rel="stylesheet" href="{{asset('css/Perfil.css')}}">
+<link rel="stylesheet" href="{{asset('css/dropzone.css')}}">
 @stop
 @section('content')
 <nav class="navbar navbar-light bg-light">
@@ -29,6 +30,21 @@
     <div class="text-center">
         <img src="{{Auth::user()->foto_perfil}}" class="rounded-circle" alt="42">
         <h3>{{Auth::user()->Nombres}}</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+    @include('Habitacion.Formulario')
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <h6>Habitaciones</h6> 
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+    
     </div>
   </div>
 </div>

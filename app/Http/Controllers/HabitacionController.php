@@ -33,17 +33,10 @@ class HabitacionController extends Controller
      */
     public function store(Request $request)
     {
-        $moto = new motocicleta();
-        $moto->placa = $request->placa;
-        $moto->cilindrada = $request->cilindrada;
-        $moto->color = $request->color;
-        $moto->Eliminado = 0;
-        $moto->user_id = $request->iduser;
-        $moto->dispositivos_id = $request->idDisp;
-        $moto->save();
         return response()->json([
-            "mensaje" =>  $request->all()
+            "datos" =>  $request->all()     
         ]);
+        
     }
 
     /**
